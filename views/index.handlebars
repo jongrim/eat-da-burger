@@ -1,0 +1,43 @@
+<header>
+  <div>
+    <img src="../../images/burgers.jpg" alt="Burgers" class="header-img" />
+    <p class="caption">Photo by Niklas Rhöse on Unsplash</p>
+  </div>
+</header>
+<div class='burger-menu'>
+
+  {{#if burgers}}
+  <div class="menu">
+    <h2>To Eat</h2>
+    {{#each burgers}}
+    <form action="/devour" method="POST">
+      <div class="item">
+        <p>{{number}} - {{burger}}</p>
+        <input type="hidden" name="burger" value={{id}}>
+        <button type="submit">Devour</button>
+      </div>
+    </form>
+    {{/each}}
+  </div>
+  {{/if}}
+
+
+  <form action="/" method="POST" class="menu">
+    <h3>Add to List</h2>
+      <input type="text" name="burger">
+      <button type="submit">Submit</button>
+  </form>
+
+
+  {{#if eaten}}
+  <div class="menu">
+    <h2>Devoured</h2>
+    {{#each eaten}}
+    <div class="item">
+      <p>{{burger}}</p>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+
+</div>

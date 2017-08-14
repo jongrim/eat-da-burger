@@ -1,0 +1,14 @@
+{
+  "name": "burger-handlebars",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jonathan Grim <jonjongrim@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "express-handlebars": "^3.0.0",
+    "morgan": "^1.8.2",
+    "mysql2": "^1.4.0"
+  }
+}
