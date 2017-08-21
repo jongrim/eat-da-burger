@@ -1,8 +1,9 @@
 const router = require('express').Router();
-const controller = require('../controllers');
+// const controller = require('../controllers');
+const db = require('../models');
 
 router.get('/', function(req, res) {
-  controller.getAll().then(results => {
+  db.burger.findAll({}).then(results => {
     let devoured = results.filter(burger => {
       if (burger.devoured) {
         return burger;
@@ -22,15 +23,34 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-  controller.addOne(req.body).then(() => {
-    res.redirect('/');
-  });
+  let { burger } = req.body;
+  db.burger
+    .create({
+      burger
+    })
+    .then(() => {
+      res.redirect('/');
+    });
 });
 
 router.post('/devour', function(req, res) {
-  controller.updateOne(req.body).then(() => {
-    res.redirect('/');
-  });
+  let { burger } = req.body;
+  console.log(burger);
+  db.burger
+    .find({
+      where: {
+        id: burger
+      }
+    })
+    .then(burger => {
+      burger.update({
+        burger: burger.burger,
+        devoured: true
+      });
+    })
+    .then(() => {
+      res.redirect('/');
+    });
 });
 
 module.exports = router;

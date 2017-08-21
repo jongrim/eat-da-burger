@@ -4,6 +4,7 @@ const morgan = require('morgan');
 
 const app = express();
 const port = process.env.PORT || 3000;
+const db = require('./models');
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
@@ -15,4 +16,6 @@ app.set('view engine', 'handlebars');
 
 app.use('/', require('./routes'));
 
-app.listen(port);
+db.sequelize.sync({ force: true }).then(() => {
+  app.listen(port);
+});
